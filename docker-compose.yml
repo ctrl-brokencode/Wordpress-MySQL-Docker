@@ -5,12 +5,9 @@ services:
     ports:
       - 80:80
     environment:
-      WORDPRESS_DB_HOST: <rds-endpoin>
+      WORDPRESS_DB_HOST: <rds-endpoint>
       WORDPRESS_DB_USER: <database-main-user>
       WORDPRESS_DB_PASSWORD: <database-password>
       WORDPRESS_DB_NAME: <database-name>
     volumes:
-      - wordpress:/var/www/html
-
-volumes:
-  wordpress:
+      - /mnt/efs/wordpress:/var/www/html
