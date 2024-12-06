@@ -28,9 +28,7 @@ services:
       WORDPRESS_DB_PASSWORD: <database-password>
       WORDPRESS_DB_NAME: <database-name>
     volumes:
-      - wordpress:/var/www/html
-volumes:
-  wordpress:
+      - /mnt/efs/wordpress:/var/www/html
 EOF
 docker compose -f /home/ubuntu/docker-compose.yaml up -d
 # Montagem do EFS
