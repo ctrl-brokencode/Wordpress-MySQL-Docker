@@ -35,5 +35,6 @@ docker compose -f /home/ubuntu/docker-compose.yaml up -d
 apt-get install -y nfs-common
 mkdir -p /mnt/efs
 # !!! Insira nessa linha o comando copiado em Anexar usando client do NFS "altere o 'efs' para '/mnt/efs' no final"
+chown -R 1000:1000 /mnt/efs/wordpress
 echo "<EFS-DNS-Name>:/ /mnt/efs nfs defaults,_netdev 0 0" >> /etc/fstab
 
