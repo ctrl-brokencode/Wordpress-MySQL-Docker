@@ -16,7 +16,6 @@ Se encontre no passo a passo para se guiar!
 - [EFS (*Elastic File System*)](#efs-elastic-file-system)
 - [RDS (*Relational Database Service*)](#banco-de-dados-rds-relational-database-service)
 - [EC2 (*Elastic Compute Cloud*) - Modelo de Execução](#ec2-elastic-compute-cloud---modelo-de-execução)
-- - [Configuração](#configuração-da-ec2)
 - - [O que é esse user_data.sh?](#o-que-é-esse-user_datash)
 - [Grupo de Destino (*Target Group*)](#grupo-de-destino-target-group)
 - [Balanceador de Carga (*Load Balancer*)](#balanceador-de-carga-load-balancer)
@@ -161,7 +160,7 @@ E finalmente, vamos a criação da EC2. Uma instância EC2 é uma máquina virtu
 - - **Tipo de Instância**: t2.micro
 - - **Sub-rede**: Não incluir no modelo de execução
 - - **Firewall (grupos de segurança)**: Selecione grupo de securança existente - Selecione o [grupo de segurança criado anteriormente](#configuração-do-security-group-das-instâncias-ec2) (meu caso: wp-ec2-instance-sg)
-- - **Configuração avançada de rede**: Adicionar interface de rede. Não precisamos alterar nada aqui
+- - **Configuração avançada de rede**: Caso não tenha, clique em **Adicionar interface de rede**. Não precisamos alterar nada aqui
 - - **EBS Volumes**: Clique no Volume 1 e altere o **Tipo de volume** para **gp2**
 - - **Tags de Recurso**: Fornecidas pela Compass para realização do Projeto, apenas a tag Name sendo personalizada
 - - **Detalhes avançados > Dados do usuário**: Insira o arquivo [user_data.sh](#o-que-é-esse-user_datash)
