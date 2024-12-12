@@ -1,6 +1,6 @@
-# Aplicação Wordpress com Banco de Dados MySQL com Docker
+# Aplicação Wordpress em AWS
 
-Esse projeto organizado no Programa de Bolsas da Compass UOL tem como objetivo subir uma aplicação Wordpress com Docker, fazer conexão dom Banco de Dados RDS e Sistema de Arquivos EFS, controle de trafégo de intener pelo Load Balancer e Auto Scaling.
+Esse projeto, organizado no Programa de Bolsas da Compass UOL, tem como objetivo subir uma aplicação Wordpress com Docker, fazer conexão dom Banco de Dados RDS e Sistema de Arquivos EFS, controlar o trafégo de internet pelo Load Balancer e Auto Scaling.
 
 # Índice
 
@@ -109,19 +109,19 @@ Essa regra permite que a Instância EC2 (indicado na Otigem) se conecte com o Si
 
 # EFS (*Elastic File System*)
 
-Com nossos grupos configurados, vamos começar criando o **EFS**, um sistema de arquivos na nuvem que permite que você compartilhe arquivos entre as instâncias EC2 e outros recursos da AWS. Faremos isso para compartilhar arquivos entre as outras instâncias ativas.
+Com nossos grupos configurados, vamos começar criando o **EFS**, um sistema de arquivos na nuvem que permite que você compartilhe arquivos entre as instâncias EC2 e outros recursos da AWS. Faremos isso para compartilhar arquivos entre as outras instâncias ativas. Aqui, o Wordpress guardará arquivos como imagens, vídeos, temas e plugins.
 
 - Vá para a página do **EFS**, clique em **Criar sistema de arquivos** e siga pra a página de **personalizar**
 - - Na página de **Configuração Geral**, não foi alterado nada além do Nome (primeiro campo, meu caso: wp-file-system). Siga para a próxima página.
-- - **Virtual Private Cloud (VPC)**: Selecione a sua VPC
-- - **Destinos de Montagem**: Coloque as duas **Zonas de Disponibilidade** e altere os **Grupos de segurança** para os que foi criado na etapa anterior. Siga para a próxima página.
+- - **Virtual Private Cloud (VPC)**: Selecione a [VPC criada anteriormente](#vpc-virtual-private-cloud)
+- - **Destinos de Montagem**: Coloque as duas **Zonas de Disponibilidade**, se certifique que as sub-redes de ambas são as sub-redes privadas e altere os **Grupos de segurança** para o [grupo que foi criado para o EFS](#configuração-do-security-group-do-sistema-de-arquivos). Siga para a próxima página.
 - - A página de **Política do sistema de arquivos** também não foi alterada. Siga com a criação do sistema.
 
-Após a criação do EFS, clique no nome ou no ID que foi dado à ele e anote o **Nome de DNS**. Você vai precisar dele mais tarde. Feito isso, clique no botão **Anexar** no lado superior direito da tela. Copie o comando que diz *Usando o cliente do NFS* e guarde ele também. Nós o utilizaremos mais tarde.
+Após a criação do EFS, clique no nome ou no ID que foi dado à ele e anote o **Nome de DNS**. Você vai precisar dele mais tarde. Feito isso, clique no botão **Anexar** no lado superior direito da tela. Clique na opção **Montar via DNS**, copie o comando que diz **Usando o cliente do NFS** e guarde ele também. Nós o utilizaremos mais tarde.
 
 # Banco de Dados RDS (*Relational Database Service*)
 
-Agora vamos fazer a criação do Banco de Dados. Esse serviço permite criar e gerenciar bancos de dados relacionais na nuvem, oferecendo escalabilidade, segurança e alta disponibilidade.
+Agora vamos fazer a criação do Banco de Dados. Esse serviço permite criar e gerenciar bancos de dados relacionais na nuvem, oferecendo escalabilidade, segurança e alta disponibilidade. Vamos usar ele para o Wordpress armazenar dados de forma estruturada, facilitando nas consultas e gereciamento do conteúdo do site.
 
 - Siga para a página de RDS e clique no botão **Criar banco de dados**
 - - **Tipo de mecanismo**: MySQL
@@ -223,7 +223,7 @@ Agora sim vamos fazer a aplicação subir com a DNS do nosso Balanceador de Carg
 # Escalonamento Automático (*Auto Scaling*)
 
 A última etapa! Vamos garantir que nosso sistema esteja sempre funcionando.
-O Auto Scaling permite aumentar ou diminuir automaticamente o número de instâncias EC2 em execução com base em algumas condições específicas, tipo demanda de tráfego, utilização de recursos, e outros. Isso ajuda a garantir que a aplicação esteja sempre disponível e escalável, sem a necessidade de termos que verificar manualmente.
+O Auto Scaling permite aumentar ou diminuir automaticamente o número de instâncias EC2 em execução com base em algumas condições específicas, tipo demanda de tráfego e utilização de recursos. Isso ajuda a garantir que a aplicação esteja sempre disponível e escalável, sem a necessidade de termos que verificar manualmente.
 
 - Vá na página da EC2 e localize no menu lateral esquerdo os **Grupos Auto Scaling**, clicando em **Criar grupo do Auto Scaling** logo após.
 - - Dê um **Nome do grupo do Auto Scaling** (meu caso: wp-auto-scale)
