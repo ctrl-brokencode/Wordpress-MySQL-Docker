@@ -202,7 +202,7 @@ Antes da criação do Load Balancer, precisamos criar um Grupo de Destino, permi
 - - **Tipo de edenreço IP**: IPv4
 - - **VPC**: Selecione sua [VPC criada anteriormente](#vpc-virtual-private-cloud)
 - - **Versão do protocolo**: HTTP1
-- - **Configurações avançadas de verificação de integridade > Códios de sucesso**: 200,302 
+- - **Configurações avançadas de verificação de integridade > Códigos de sucesso**: 200,302 
 - - - Isso é para os códigos de saída que as instâncias vão receber. A saída 200 indica que o Wordpress está OK, enquanto a saída 302 indica que o wordpress está aguardando configuração (página de login) 
 - - Clique em **Próximo**. Nessa página, não vamos colocar nenhum destino (estes devem estar vazios). Siga com a criação do grupo de destino
 
